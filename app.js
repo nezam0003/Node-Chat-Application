@@ -5,6 +5,9 @@ const dotenv = require("dotenv");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const loginRouter = require("./router/loginRouter");
+const usersRouter = require("./router/usersRouter");
+const inboxRouter = require("./router/inboxRouter");
 
 const {
   notFoundHandler,
@@ -37,6 +40,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 /********** Router setup *********/
+app.use("/", loginRouter);
+app.use("/users", usersRouter);
+app.use("/inbox", inboxRouter);
 
 /************ 404 not found Handler ***********/
 app.use(notFoundHandler);
